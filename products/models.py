@@ -53,3 +53,35 @@ class Product(models.Model):
 
 
 
+class ProductVariant(models.Model):
+    MATERIAL_CHOICES = [
+        ('WOOD', 'Wood'),
+        ('METAL', 'Metal'),
+        ('GLASS', 'Glass'),
+        ('PLASTIC', 'Plastic'),
+        ('FABRIC', 'Fabric'),
+        ('LEATHER', 'Leather'),
+        ('MARBLE', 'Marble'),
+        ('BAMBOO', 'Bamboo'),
+        ('PLYWOOD', 'Plywood'),
+        ('MDF', 'Medium-Density Fiberboard'),
+        ('RATTAN', 'Rattan / Wicker'),
+        ('STONE', 'Stone'),
+        ('ACRYLIC', 'Acrylic'),
+        ('COMPOSITE', 'Composite / Engineered Material'),
+    ]
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    material = models.CharField(choices=MATERIAL_CHOICES,max_length=100)
+    color = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True,blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.product} - {self.material}'
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.material)
+        super().save(*args, **kwargs)
+
+
