@@ -50,9 +50,6 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
 
-
-
-
 class ProductVariant(models.Model):
     MATERIAL_CHOICES = [
         ('WOOD', 'Wood'),
