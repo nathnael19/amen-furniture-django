@@ -85,3 +85,18 @@ class ProductVariant(models.Model):
         super().save(*args, **kwargs)
 
 
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='products/',blank=True,null=True)
+    is_main = models.BooleanField(default=False)
+    slug = models.SlugField(unique=True,blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    updatedAt = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.image
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.image)
+        super().save(*args, **kwargs)
