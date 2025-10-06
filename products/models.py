@@ -7,7 +7,6 @@ class Category(models.Model):
     id = models.UUIDField(default=uuid.uuid4,primary_key=True,editable=False)
     name = models.CharField(max_length=255,unique=True)
     slug = models.SlugField(unique=True,blank=True)
-    description = models.TextField()
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
 
@@ -21,3 +20,5 @@ class Category(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
+
+
