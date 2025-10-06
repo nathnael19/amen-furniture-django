@@ -24,3 +24,15 @@ class UserManager(BaseUserManager):
             user.save(using=self._db)
 
             return user
+        
+        
+        def create_superuser(self,username,email,phone,first_name,last_name,password,**extra_fileds):
+            extra_fileds.setdefault('is_staff', True)
+            extra_fileds.setdefault('is_superuser',True)
+
+            if extra_fileds.get('is_staff') is not True:
+                raise ValueError("Superuser must have is_staff=True")
+            if extra_fileds.get('is_superuser') is not True:
+                raise ValueError("Superuser must have is_superuser=True")
+            
+            return self.create_user(username,email,phone,password,first_name,last_name,**extra_fileds)
