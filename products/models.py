@@ -67,7 +67,7 @@ class ProductVariant(models.Model):
         ('ACRYLIC', 'Acrylic'),
         ('COMPOSITE', 'Composite / Engineered Material'),
     ]
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name="variants")
     material = models.CharField(choices=MATERIAL_CHOICES,max_length=100)
     color = models.CharField(max_length=100)
     slug = models.SlugField(unique=True,blank=True)
