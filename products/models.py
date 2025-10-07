@@ -92,10 +92,10 @@ class ProductImage(models.Model):
     updatedAt = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.image
+        return self.slug
     
     def save(self, *args, **kwargs):
         if not (self.slug or self.alt_text):
-            self.slug = slugify(self.image)
+            self.slug = slugify(str(self.image))
             self.alt_text = slugify(f'{self.product}. {self.image}')
         super().save(*args, **kwargs)

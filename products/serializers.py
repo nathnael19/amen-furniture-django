@@ -10,12 +10,19 @@ class CategorySerializer(serializers.ModelSerializer):
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
-        fields = ['image', 'is_main']
+        fields = ['image', 'is_main','alt_text']
+
+
+class ProducVariantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductVariant
+        fields = ['material','color']
 
 
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     images = ProductImageSerializer(many=True, read_only=True)
+    variants = ProducVariantSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
