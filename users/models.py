@@ -18,7 +18,7 @@ class User(AbstractUser):
 
 
 class Address(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="address")
     address = models.CharField(max_length=255)
     is_default = models.BooleanField(default=True)
     createdAt = models.DateTimeField(auto_now_add=True)

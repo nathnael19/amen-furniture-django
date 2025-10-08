@@ -1,11 +1,17 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
-from .models import User
+from .models import User,Address
+
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = "__all__"
 
 class UserSerializer(serializers.ModelSerializer):
+    addressa = AddressSerializer
     class Meta:
         model = User
-        fields = ['id','username','email','phone']
+        fields = "__all__"
 
     def create(self,validated_data):
         user = User.objects.create_user(
