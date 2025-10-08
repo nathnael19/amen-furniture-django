@@ -13,4 +13,11 @@ class CartItemSerializer(serializers.ModelSerializer):
         fields = ['id','product','product_id','quantity','subtotal']
 
 
-        
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True,read_only=True)
+    total = serializers.DecimalField(decimal_places=2,max_digits=10,read_only=True)
+
+    class Meta:
+        model = Cart
+        fields = ['id','user','items','total']
+        read_only_fields = ['user']        
