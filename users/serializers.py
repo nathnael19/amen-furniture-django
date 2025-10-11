@@ -8,10 +8,10 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class UserSerializer(serializers.ModelSerializer):
-    address = AddressSerializer(read_only=True)
+    # address = AddressSerializer(read_only=True)
     class Meta:
         model = User
-        fields = "__all__"
+        exclude = ['groups','is_superuser','password','id','last_login']
 
     def create(self,validated_data):
         user = User.objects.create_user(

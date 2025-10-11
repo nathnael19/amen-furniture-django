@@ -1,12 +1,13 @@
-from django.shortcuts import render
-from rest_framework.response import Response
+from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Product
 from .serializers import ProductSerializer
-# Create your views here.
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['category__name','name','user__username']
+
 
