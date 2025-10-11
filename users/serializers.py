@@ -8,7 +8,7 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class UserSerializer(serializers.ModelSerializer):
-    addressa = AddressSerializer
+    address = AddressSerializer(read_only=True)
     class Meta:
         model = User
         fields = "__all__"
@@ -42,6 +42,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             last_name = validated_data['last_name'],
         )
 
+class ViewUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        exclude = ['password']
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()

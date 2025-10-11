@@ -76,10 +76,10 @@ class ProductVariant(models.Model):
     def __str__(self):
         return f'{self.product} - {self.material}'
     
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.material)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.slug:
+    #         self.slug = slugify(self.material)
+    #     super().save(*args, **kwargs)
 
 
 class ProductImage(models.Model):
