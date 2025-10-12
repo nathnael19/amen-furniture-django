@@ -19,9 +19,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
 ALLOWED_HOSTS = [
-    "amen-furniture.onrender.com",  # Replace with your actual Render domain
-    "localhost",
-    "127.0.0.1",
+    "*"
 ]
 
 # ============================================================
