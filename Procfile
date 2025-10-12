@@ -1,0 +1,1 @@
+web: gunicorn amen_furniture.wsgi
