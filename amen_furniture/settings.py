@@ -17,7 +17,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = config("DEBUG",cast=bool)
 
-ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
+ALLOWED_HOSTS = ["*"]
 
 # ============================================================
 # INSTALLED APPS
@@ -81,26 +81,9 @@ WSGI_APPLICATION = "amen_furniture.wsgi.application"
 # DATABASE CONFIGURATION
 # ============================================================
 # if "RENDER" in os.environ:
-#     DATABASES = {
-#         "default": dj_database_url.config(
-#             default=os.environ.get("DATABASE_URL"),
-#             conn_max_age=600,
-#             ssl_require=True
-#         )
-#     }
-# else:
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME":config("DB_NAME"),
-        "USER": config("DB_USER"),
-        "PASSWORD": config("DB_PASSWORD"),
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+    "default": dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
-
-DATABASES["default"] = dj_database_url.parse(config("DATABASE_URL"))
 
 # ============================================================
 # PASSWORD VALIDATION
