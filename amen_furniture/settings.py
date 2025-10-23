@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # Third-party apps
     "rest_framework",
     "rest_framework_simplejwt",
+    "corsheaders",
 
     # Your custom apps
     "users",
@@ -45,6 +46,8 @@ INSTALLED_APPS = [
 # MIDDLEWARE
 # ============================================================
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -134,3 +137,11 @@ AUTH_USER_MODEL = "users.User"
 # DEFAULT PRIMARY KEY FIELD TYPE
 # ============================================================
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+#CORSHEADER
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://amen-k4ut.onrender.com",
+]
